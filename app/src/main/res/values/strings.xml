@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Banco</string>
+    <string name="lblMail">Correo</string>
+    <string name="lblCuit">CUIT</string>
+    <string name="lblMonto">Monto a invertir</string>
+    <string name="lblMoneda">Moneda</string>
+    <string name="lblMonedaDolar">U$</string>
+    <string name="lblMonedaPesos">AR$</string>
+    <string name="lblDias">Días seleccionados</string>
+    <string name="lblDiasInversion">Cantidad días inversión</string>
+    <string name="lblRendimiento">Rendimiento</string>
+    <string name="lblAvisarVencimiento">Avisar vencimiento</string>
+    <string name="lblAceptoTerminos">Aceptar Terminos y Condiciones</string>
+    <string name="lblAccionVencimientoRenovar">Renovar</string>
+    <string name="lblAccionVencimientoAcreditar">Acreditar</string>
+
+    <!--Texto de botones-->
+    <string name="lblAcreditar">Acreditar en cuenta</string>
+    <string name="lblHacerPF">Hacer plazo fijo</string>
+</resources>
