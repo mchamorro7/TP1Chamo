@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class PlazoFijo {
 
-    private Integer dias;
+    private Double dias;
     private Double monto;
     private Boolean avisarVencimiento;
     private Boolean renovarAutomaticamente;
@@ -19,18 +19,18 @@ public class PlazoFijo {
         Log.d("APP_01", Arrays.toString(tasas));
         this.tasas=tasas;
         this.monto=0.0;
-        this.dias=0;
+        this.dias=0.0;
         this.avisarVencimiento=false;
         this.renovarAutomaticamente=false;
         this.moneda=Moneda.PESO;
     }
 
-    public Integer getDias() {
+    public Double getDias() {
         return dias;
     }
 
 
-    public void setDias(Integer dias) {
+    public void setDias(Double dias) {
         this.dias = dias;
     }
 
@@ -101,7 +101,10 @@ public class PlazoFijo {
 
     public Double intereses(){
         Double i, temp;
-        temp = Math.pow(1+this.calcularTasa()/100,(this.dias/360));
+        Double base, exp;
+        base = 1+this.calcularTasa()/100;
+        exp = this.dias/360;
+        temp = Math.pow(base,exp);
         i = this.monto*(temp-1);
         return i;
     }

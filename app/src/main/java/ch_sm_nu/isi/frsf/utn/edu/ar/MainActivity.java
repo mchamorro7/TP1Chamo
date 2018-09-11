@@ -83,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
             edtMensajes = (TextView) findViewById(R.id.edtMensajes);
             // completar con el resto de los widgets de la vista
 
+            togAccion.setEnabled(true);
             final TextView t1=new TextView(this);
             t1.setText("10");
             final SeekBar sk=(SeekBar) findViewById(R.id.seekDias);
@@ -101,13 +102,20 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                     // TODO Auto-generated method stub
-                    tvDiasSeleccionados.setText(String.valueOf(progress)+" dias de plazo");
-                    pf.setDias(31); //pf.setDias(progress);
-                    pf.setMonto(170.0); //pf.setMonto(Double.valueOf(edtMonto.getText().toString()));
-                    tvIntereses.setText(pf.intereses().toString());
-                    t1.setTextSize(progress);
-                   // Toast.makeText(getApplicationContext(), String.valueOf(progress),Toast.LENGTH_LONG).show();
-
+                        int valorInicial;
+                        valorInicial=10;
+                        tvDiasSeleccionados.setText(String.valueOf(progress+valorInicial)+" dias de plazo");
+                        pf.setDias(Double.valueOf(progress+valorInicial));
+                        if(edtMonto.getText().toString().isEmpty()){
+                            pf.setMonto(Double.valueOf(0));
+                        }
+                        else{
+                            pf.setMonto(Double.valueOf(edtMonto.getText().toString()));
+                        }
+                        String intereses = String.format ("%.2f", pf.intereses());
+                        tvIntereses.setText(intereses);
+                        t1.setTextSize(progress+valorInicial);
+                        // Toast.makeText(getApplicationContext(), String.valueOf(progress),Toast.LENGTH_LONG).show();
                 }
             });
 
@@ -119,10 +127,11 @@ public class MainActivity extends AppCompatActivity {
              @Override
              public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
 
-                 if(isChecked){
+                 if(isChecked && btnHacerPlazoFijo.isEnabled()==false){
                     btnHacerPlazoFijo.setEnabled(true);
                     }
                 else{
+                     btnHacerPlazoFijo.setEnabled(false);
                      Toast toast1 =
                              Toast.makeText(getApplicationContext(),
                                      "Es obligatorio aceptar las condiciones.", Toast.LENGTH_LONG);
@@ -130,7 +139,16 @@ public class MainActivity extends AppCompatActivity {
                 }
              }
          });
-
+            togAccion.setOnClickListener(new View.OnClickListener(){
+               public void onClick(View v){
+                   if(togAccion.isChecked()){
+                       pf.setRenovarAutomaticamente(true);
+                   }
+                   else{
+                       pf.setRenovarAutomaticamente(false);
+                   }
+               }
+            });
             btnHacerPlazoFijo.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     if(edtMail.length()==0){
@@ -173,17 +191,29 @@ public class MainActivity extends AppCompatActivity {
                         edtMensajes.setTextColor(Color.rgb(255,0,0));
                         edtMensajes.setText("El plazo fijo no puede superar los 180 días.");
                     }
-                    else{
+                    else if(optMoneda.getCheckedRadioButtonId()==-1){
+                        Toast toast1 =
+                                Toast.makeText(getApplicationContext(),
+                                        "Es obligatorio seleccionar el tipo de moneda.", Toast.LENGTH_LONG);
+                        toast1.show();
+                        edtMensajes.setTextColor(Color.rgb(255,0,0));
+                        edtMensajes.setText("Es obligatorio seleccionar el tipo de moneda.");
+                    }else{
                         Toast toast1 =
                                 Toast.makeText(getApplicationContext(),
                                         "Plazo fijo exitoso.", Toast.LENGTH_LONG);
                         toast1.show();
                         edtMensajes.setTextColor(Color.rgb(0,0,255));
                         edtMensajes.setText("Plazo fijo exitoso");
-                        edtMensajes.setText("PlazoFijo{dias="+Integer.parseInt(t1.getText().toString())+", monto="+edtMonto.getText().toString()+" avisarVencimiento="+swAvisarVencimiento.getText().toString()
-                        +" renovarAutomaticamente="+" "+" moneda=");
 
-                        //FALTA PONER TODOS LOS DATOS EXITOSOS - nombrarlos nomas-
+                        if(swAvisarVencimiento.isActivated()){
+                            pf.setAvisarVencimiento(true);
+                        }else{
+                            pf.setAvisarVencimiento(false);
+                        }
+
+                        edtMensajes.setText("PlazoFijo{dias="+pf.getDias()+", monto="+pf.getMonto()+" avisarVencimiento="+pf.getAvisarVencimiento()
+                                +" renovarAutomaticamente="+pf.getRenovarAutomaticamente()+" moneda=" + pf.getMoneda() + "}");
                     }
                 }
             });
