@@ -14,7 +14,7 @@
     <string name="lblAceptoTerminos">Aceptar Terminos y Condiciones</string>
     <string name="lblAccionVencimientoRenovar">Renovar</string>
     <string name="lblAccionVencimientoAcreditar">Acreditar</string>
-
+    <string name="lblEmail">Email</string>
     <!--Texto de botones-->
     <string name="lblAcreditar">Acreditar en cuenta</string>
     <string name="lblHacerPF">Hacer plazo fijo</string>

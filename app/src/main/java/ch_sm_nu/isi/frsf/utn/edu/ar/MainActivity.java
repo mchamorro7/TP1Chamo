@@ -175,6 +175,8 @@ public class MainActivity extends AppCompatActivity {
                         toast1.show();
                         edtMensajes.setTextColor(Color.rgb(0,255,0));
                         edtMensajes.setText("Plazo fijo exitoso");
+                        edtMensajes.setText("PlazoFijo{dias="+Integer.parseInt(t1.getText().toString())+", monto="+edtMonto.getText().toString()+" avisarVencimiento="+swAvisarVencimiento.getText().toString()
+                        +" renovarAutomaticamente="+" "+" moneda="+optMoneda.toString());
 
                         //FALTA PONER TODOS LOS DATOS EXITOSOS - nombrarlos nomas-
                     }
