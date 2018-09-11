@@ -29,6 +29,7 @@ public class PlazoFijo {
         return dias;
     }
 
+
     public void setDias(Integer dias) {
         this.dias = dias;
     }
@@ -37,8 +38,8 @@ public class PlazoFijo {
         return monto;
     }
 
-    public void setMonto(Double monto) {
-        this.monto = monto;
+    public void setMonto(Double m) {
+        this.monto = m;
     }
 
     public Boolean getAvisarVencimiento() {
@@ -81,7 +82,7 @@ public class PlazoFijo {
         this.cliente = cliente;
     }
 
-    private Double calcularTasa(){
+    public Double calcularTasa(){
 
         if(this.dias<30 && this.monto<=5000){
             return 0.25;
@@ -99,8 +100,8 @@ public class PlazoFijo {
     }
 
     public Double intereses(){
-        Double i;
-        Double temp = Math.pow(1+this.calcularTasa()/100,(this.dias/360));
+        Double i, temp;
+        temp = Math.pow(1+this.calcularTasa()/100,(this.dias/360));
         i = this.monto*(temp-1);
         return i;
     }

@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
             optDolar = (RadioButton) findViewById(R.id.optDolar);
             optPesos = (RadioButton) findViewById(R.id.optPesos);
             tvMonto = (TextView) findViewById(R.id.tvMonto);
+            edtMonto = (EditText)  findViewById(R.id.edtMonto);
             tvDias = (TextView) findViewById(R.id.tvDias);
             seekDias = (SeekBar) findViewById(R.id.seekDias);
             tvDiasSeleccionados = (TextView) findViewById(R.id.tvDiasSeleccionados);
@@ -100,12 +101,16 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser) {
                     // TODO Auto-generated method stub
-
+                    tvDiasSeleccionados.setText(String.valueOf(progress)+" dias de plazo");
+                    pf.setDias(31); //pf.setDias(progress);
+                    pf.setMonto(170.0); //pf.setMonto(Double.valueOf(edtMonto.getText().toString()));
+                    tvIntereses.setText(pf.intereses().toString());
                     t1.setTextSize(progress);
                    // Toast.makeText(getApplicationContext(), String.valueOf(progress),Toast.LENGTH_LONG).show();
 
                 }
             });
+
 
             //ACEPTA TERMINOS
 
@@ -173,10 +178,10 @@ public class MainActivity extends AppCompatActivity {
                                 Toast.makeText(getApplicationContext(),
                                         "Plazo fijo exitoso.", Toast.LENGTH_LONG);
                         toast1.show();
-                        edtMensajes.setTextColor(Color.rgb(0,255,0));
+                        edtMensajes.setTextColor(Color.rgb(0,0,255));
                         edtMensajes.setText("Plazo fijo exitoso");
                         edtMensajes.setText("PlazoFijo{dias="+Integer.parseInt(t1.getText().toString())+", monto="+edtMonto.getText().toString()+" avisarVencimiento="+swAvisarVencimiento.getText().toString()
-                        +" renovarAutomaticamente="+" "+" moneda="+optMoneda.toString());
+                        +" renovarAutomaticamente="+" "+" moneda=");
 
                         //FALTA PONER TODOS LOS DATOS EXITOSOS - nombrarlos nomas-
                     }

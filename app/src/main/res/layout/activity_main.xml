@@ -10,9 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="139dp"
-        tools:layout_editor_absoluteY="0dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
             android:id="@+id/tvCorreo"
@@ -24,7 +24,7 @@
             android:id="@+id/edtMail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress" />
 
         <TextView
             android:id="@+id/tvCuit"
@@ -47,19 +47,21 @@
         <RadioGroup
             android:id="@+id/optMoneda"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <RadioButton
-                android:id="@+id/optDolar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/lblMonedaDolar" />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/optPesos"
-                android:layout_width="match_parent"
+                android:layout_width="71dp"
                 android:layout_height="wrap_content"
                 android:text="@string/lblMonedaPesos" />
+
+            <RadioButton
+                android:id="@+id/optDolar"
+                android:layout_width="65dp"
+                android:layout_height="wrap_content"
+                android:text="@string/lblMonedaDolar" />
+
         </RadioGroup>
 
         <TextView
@@ -91,7 +93,7 @@
             android:id="@+id/tvDiasSeleccionados"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text=""/>
+            android:text=" " />
 
         <TextView
             android:id="@+id/tvIntereses"
@@ -100,19 +102,19 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:visibility="visible">
 
             <TextView
                 android:id="@+id/tvAvisarVencimiento"
-                android:layout_width="match_parent"
+                android:layout_width="160dp"
                 android:layout_height="wrap_content"
                 android:text="@string/lblAvisarVencimiento" />
 
             <Switch
                 android:id="@+id/swAvisarVencimiento"
-                android:layout_width="match_parent"
+                android:layout_width="57dp"
                 android:layout_height="wrap_content" />
 
         </LinearLayout>
@@ -120,10 +122,10 @@
         <ToggleButton
             android:id="@+id/togAccion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="38dp"
+            android:enabled="false"
             android:textOff="@string/lblAccionVencimientoAcreditar"
-            android:textOn="@string/lblAccionVencimientoRenovar"
-            android:enabled="false"/>
+            android:textOn="@string/lblAccionVencimientoRenovar" />
 
         <CheckBox
             android:id="@+id/chkAceptoTerminos"
@@ -134,7 +136,7 @@
         <Button
             android:id="@+id/btnHacerPF"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="36dp"
             android:text="@string/lblHacerPF"
             android:visibility="visible" />
 
