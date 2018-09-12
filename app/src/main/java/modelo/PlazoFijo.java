@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class PlazoFijo {
 
-    private Double dias;
+    private Integer dias;
     private Double monto;
     private Boolean avisarVencimiento;
     private Boolean renovarAutomaticamente;
@@ -19,18 +19,18 @@ public class PlazoFijo {
         Log.d("APP_01", Arrays.toString(tasas));
         this.tasas=tasas;
         this.monto=0.0;
-        this.dias=0.0;
+        this.dias=0;
         this.avisarVencimiento=false;
         this.renovarAutomaticamente=false;
         this.moneda=Moneda.PESO;
     }
 
-    public Double getDias() {
+    public Integer getDias() {
         return dias;
     }
 
 
-    public void setDias(Double dias) {
+    public void setDias(Integer dias) {
         this.dias = dias;
     }
 
@@ -85,25 +85,26 @@ public class PlazoFijo {
     public Double calcularTasa(){
 
         if(this.dias<30 && this.monto<=5000){
-            return 0.25;
+            return 25.0;
         }
         else if(this.dias>=30 && this.monto<=5000){
-            return 0.275;
+            return 27.5;
         }
         else if(this.dias<30 && this.monto>5000 && this.monto<=99999){
-            return 0.3;
+            return 30.0;
         }
         else if(this.dias>=30 &&  this.monto>5000 && this.monto<=99999){
-            return 0.323;
-        }
-        return 0.0;
+            return 32.3;
+        }else if(this.dias<30 &&  this.monto>99999) {
+            return 35.0;
+        } else return  38.5;
     }
 
     public Double intereses(){
         Double i, temp;
         Double base, exp;
         base = 1+this.calcularTasa()/100;
-        exp = this.dias/360;
+        exp = (double) (this.dias) /360;
         temp = Math.pow(base,exp);
         i = this.monto*(temp-1);
         return i;

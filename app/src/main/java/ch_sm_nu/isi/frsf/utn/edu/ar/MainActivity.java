@@ -19,6 +19,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import modelo.Cliente;
+import modelo.Moneda;
 import modelo.PlazoFijo;
 
 public class MainActivity extends AppCompatActivity {
@@ -105,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
                         int valorInicial;
                         valorInicial=10;
                         tvDiasSeleccionados.setText(String.valueOf(progress+valorInicial)+" dias de plazo");
-                        pf.setDias(Double.valueOf(progress+valorInicial));
+                        pf.setDias(progress+valorInicial);
                         if(edtMonto.getText().toString().isEmpty()){
                             pf.setMonto(Double.valueOf(0));
                         }
@@ -113,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
                             pf.setMonto(Double.valueOf(edtMonto.getText().toString()));
                         }
                         String intereses = String.format ("%.2f", pf.intereses());
-                        tvIntereses.setText(intereses);
+                        tvIntereses.setText("$"+intereses);
                         t1.setTextSize(progress+valorInicial);
                         // Toast.makeText(getApplicationContext(), String.valueOf(progress),Toast.LENGTH_LONG).show();
                 }
@@ -206,12 +207,14 @@ public class MainActivity extends AppCompatActivity {
                         edtMensajes.setTextColor(Color.rgb(0,0,255));
                         edtMensajes.setText("Plazo fijo exitoso");
 
-                        if(swAvisarVencimiento.isActivated()){
+                        if(swAvisarVencimiento.isChecked()){
                             pf.setAvisarVencimiento(true);
                         }else{
                             pf.setAvisarVencimiento(false);
                         }
 
+                        if(optPesos.isChecked()) pf.setMoneda(Moneda.PESO);
+                        else if (optDolar.isChecked()) pf.setMoneda(Moneda.DOLAR);
                         edtMensajes.setText("PlazoFijo{dias="+pf.getDias()+", monto="+pf.getMonto()+" avisarVencimiento="+pf.getAvisarVencimiento()
                                 +" renovarAutomaticamente="+pf.getRenovarAutomaticamente()+" moneda=" + pf.getMoneda() + "}");
                     }
